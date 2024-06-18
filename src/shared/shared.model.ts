@@ -3,3 +3,9 @@ export interface CommonResponse<T>{
     message: string;
     data: T;
 }
+
+export enum CommonStatus {
+    ACTIVE = 'Active',
+    INACTIVE = 'Inactive',
+  }
+  
