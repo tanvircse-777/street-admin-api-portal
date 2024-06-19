@@ -6,6 +6,8 @@ import { FeedbackModule } from './feedback/feedback.module';
 import { CustomerModule } from './customer/customer.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeOrmConfig), TasksModule, FeedbackModule,CustomerModule],
+  imports: [
+    // TypeOrmModule.forRoot(typeOrmConfig), TasksModule, FeedbackModule,CustomerModule
+  ],
 })
 export class AppModule {}
