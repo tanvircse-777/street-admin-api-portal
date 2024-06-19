@@ -5,11 +5,16 @@ import { Task } from "src/tasks/task.entity";
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: "postgres",
-  host: "localhost",
+  host: "cppgl6uehbks73c2bjkg-a.oregon-postgres.render.com",
   port: 5432,
-  username: "dbadmin",
-  password: "1234",
-  database: "task-management",
+  username: "street_admin_database_user",
+  password: "uKzXF4qqPIPssy9Uka2sNQ13jbUmbgpz",
+  database: "street_admin_database",
   entities: [Task, Feedback, Customer],
   synchronize: true,
+  extra: {
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  },
 };

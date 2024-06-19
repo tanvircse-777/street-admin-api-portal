@@ -6,12 +6,17 @@ const feedback_entity_1 = require("../feedback/feedback.entity");
 const task_entity_1 = require("../tasks/task.entity");
 exports.typeOrmConfig = {
     type: "postgres",
-    host: "localhost",
+    host: "cppgl6uehbks73c2bjkg-a.oregon-postgres.render.com",
     port: 5432,
-    username: "dbadmin",
-    password: "1234",
-    database: "task-management",
+    username: "street_admin_database_user",
+    password: "uKzXF4qqPIPssy9Uka2sNQ13jbUmbgpz",
+    database: "street_admin_database",
     entities: [task_entity_1.Task, feedback_entity_1.Feedback, customer_entity_1.Customer],
     synchronize: true,
+    extra: {
+        ssl: {
+            rejectUnauthorized: false,
+        },
+    },
 };
 //# sourceMappingURL=typeorm.config.js.map
