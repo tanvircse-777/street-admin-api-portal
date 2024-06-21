@@ -36,6 +36,15 @@ export class CustomerService {
     return this.customerRepository.findOneBy({ email });
   }
 
+  async isCustomerExist(email: string): Promise<{ isCustomerExist }> {
+    let customer = await this.customerRepository.findOneBy({ email });
+    if (customer) {
+      return { isCustomerExist: true };
+    } else {
+      return { isCustomerExist: false };
+    }
+  }
+
   async createCustomer(customer: Partial<Customer>): Promise<Customer> {
     const newCustomer = this.customerRepository.create(customer);
     return this.customerRepository.save(newCustomer);

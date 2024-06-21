@@ -10,7 +10,7 @@ export class Customer extends BaseEntity {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   mobile_no: string;
 
   @Column()

@@ -29,6 +29,13 @@ export class CustomerController {
     return this._customerService.getCustomerByEmail(email);
   }
 
+  @Get("/is-customer-exist/:email")
+  isCustomerExist(
+    @Param("email") email: string
+  ): Promise<{ isCustomerExist: boolean }> {
+    return this._customerService.isCustomerExist(email);
+  }
+
   @Post()
   createCustomer(@Body() requestBody: CreateCustomerDto) {
     return this._customerService.createCustomer(requestBody);
