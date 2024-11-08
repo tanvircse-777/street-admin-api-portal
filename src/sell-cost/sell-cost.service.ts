@@ -1,6 +1,17 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Between, EntityManager, IsNull, Not, Repository } from "typeorm";
+import {
+  And,
+  Between,
+  Brackets,
+  EntityManager,
+  Equal,
+  IsNull,
+  MoreThan,
+  Not,
+  Or,
+  Repository,
+} from "typeorm";
 import { SellCost } from "./sell-cost.entity";
 import { SellCostDto, UpdateSellCostDto } from "./sell-cost.dto";
 import { CommonStatus } from "src/shared/shared.model";
@@ -59,6 +70,46 @@ export class SellCostService {
         date: "ASC",
       },
     });
+  }
+
+  // async getSellCostsByDateRangeForChart(
+  //   startDate: string,
+  //   endDate: string
+  // ): Promise<SellCost[]> {
+  //   return this.sellCostRepository.find({
+  //     where: {
+  //       date: Between(startDate, endDate),
+  //       // sell: Or(Not(0), Not(IsNull())),
+  //       // cost: Or(Not(0), Not(IsNull())),
+  //       sell: Or(Not(0), Not(0)),
+  //       cost: Or(Not(0), Not(0)),
+  //     },
+  //     order: {
+  //       date: "ASC",
+  //     },
+  //   });
+  // }
+
+  async getSellCostsByDateRangeForChart(
+    startDate: string,
+    endDate: string
+  ): Promise<SellCost[]> {
+    return this.sellCostRepository
+      .createQueryBuilder("sellCost")
+      .where("sellCost.date BETWEEN :startDate AND :endDate", {
+        startDate,
+        endDate,
+      })
+      .andWhere(
+        new Brackets((qb) => {
+          qb.where("sellCost.sell != :zero", { zero: 0 }).orWhere(
+            "sellCost.cost != :zero",
+            { zero: 0 }
+          );
+        })
+      )
+      .orderBy("sellCost.date", "ASC")
+      .getMany();
   }
 
   async getSellCostById(id: number): Promise<SellCost> {
