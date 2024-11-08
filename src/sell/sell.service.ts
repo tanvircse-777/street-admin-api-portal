@@ -22,7 +22,6 @@ export class SellService {
     startDate: string,
     endDate: string
   ): Promise<Sell[]> {
-    console.log(startDate);
     return this.sellRepository.find({
       where: {
         date: Between(startDate, endDate),

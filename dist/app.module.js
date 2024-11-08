@@ -14,6 +14,7 @@ const typeorm_config_1 = require("./config/typeorm.config");
 const feedback_module_1 = require("./feedback/feedback.module");
 const customer_module_1 = require("./customer/customer.module");
 const sell_module_1 = require("./sell/sell.module");
+const sell_cost_module_1 = require("./sell-cost/sell-cost.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -25,6 +26,7 @@ exports.AppModule = AppModule = __decorate([
             feedback_module_1.FeedbackModule,
             customer_module_1.CustomerModule,
             sell_module_1.SellModule,
+            sell_cost_module_1.SellCostModule,
         ],
     })
 ], AppModule);

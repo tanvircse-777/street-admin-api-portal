@@ -5,6 +5,7 @@ import { typeOrmConfig } from "./config/typeorm.config";
 import { FeedbackModule } from "./feedback/feedback.module";
 import { CustomerModule } from "./customer/customer.module";
 import { SellModule } from "./sell/sell.module";
+import { SellCostModule } from "./sell-cost/sell-cost.module";
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { SellModule } from "./sell/sell.module";
     FeedbackModule,
     CustomerModule,
     SellModule,
+    SellCostModule,
   ],
 })
 export class AppModule {}
