@@ -34,30 +34,19 @@ export class SellCostController {
     return this._sellCostService.getSellCostsByDateRange(startDate, endDate);
   }
 
-
   @Get("by-date-range-for-chart/:startDate/:endDate")
   getSellCostsByDateRangeForChart(
     @Param("startDate") startDate: string,
     @Param("endDate") endDate: string
   ): Promise<SellCost[]> {
-    return this._sellCostService.getSellCostsByDateRangeForChart(startDate, endDate);
+    return this._sellCostService.getSellCostsByDateRangeForChart(
+      startDate,
+      endDate
+    );
   }
 
   @Post("create-or-update")
   async createOrUpdateSellCosts(@Body() payload: SellCostDto) {
     return this._sellCostService.createOrUpdateSellCosts(payload);
-  }
-
-  @Delete("delete/:id")
-  deleteSellCost(@Param("id") id: number) {
-    return this._sellCostService.deleteSellCost(Number(id));
-  }
-
-  @Patch("update/:id")
-  updateSellCost(
-    @Param("id") id: number,
-    @Body() requestBody: UpdateSellCostDto
-  ) {
-    return this._sellCostService.updateSellCost(Number(id), requestBody);
   }
 }

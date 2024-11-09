@@ -125,15 +125,5 @@ export class SellCostService {
     return this.sellCostRepository.save(newSellCost);
   }
 
-  async deleteSellCost(id: number) {
-    this.getSellCostById(id);
-    return this.sellCostRepository.delete(id);
-  }
 
-  async updateSellCost(id: number, requestBody: UpdateSellCostDto) {
-    let sellCost: SellCost = await this.getSellCostById(id);
-    await this.entityManager.save(sellCost);
-
-    return sellCost;
-  }
 }
