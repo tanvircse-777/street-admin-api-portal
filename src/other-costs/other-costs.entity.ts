@@ -11,10 +11,10 @@ export class OtherCosts extends BaseEntity {
   date: string;
 
   @Column()
-  sell: number;
+  title: string;
 
   @Column()
-  cost: number;
+  amount: number;
 
   @Column({
     type: "enum",

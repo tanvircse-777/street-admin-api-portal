@@ -14,10 +14,7 @@ export class OtherCostsRow {
   @IsString()
   databaseDateFormat: string;
 
-  
-
-  sell: number;
-  cost: number;
+  amount: number;
 
   @IsNotEmpty()
   @IsString()
