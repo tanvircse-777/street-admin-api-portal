@@ -1,4 +1,5 @@
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
+import { Attendance } from "src/attendance/attendance.entity";
 import { Customer } from "src/customer/customer.entity";
 import { Feedback } from "src/feedback/feedback.entity";
 import { OtherCosts } from "src/other-costs/other-costs.entity";
@@ -13,6 +14,6 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   username: "dbadmin",
   password: "1234",
   database: "task-management",
-  entities: [Task, Feedback, Customer, Sell, SellCost, OtherCosts],
+  entities: [Task, Feedback, Customer, Sell, SellCost, OtherCosts, Attendance],
   synchronize: true,
 };

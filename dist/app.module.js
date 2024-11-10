@@ -16,6 +16,7 @@ const customer_module_1 = require("./customer/customer.module");
 const sell_module_1 = require("./sell/sell.module");
 const sell_cost_module_1 = require("./sell-cost/sell-cost.module");
 const other_costs_module_1 = require("./other-costs/other-costs.module");
+const attendance_module_1 = require("./attendance/attendance.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -29,6 +30,7 @@ exports.AppModule = AppModule = __decorate([
             sell_module_1.SellModule,
             sell_cost_module_1.SellCostModule,
             other_costs_module_1.OtherCostsModule,
+            attendance_module_1.AttendanceModule,
         ],
     })
 ], AppModule);
