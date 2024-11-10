@@ -9,7 +9,7 @@ import {
 } from "@nestjs/common";
 import { Attendance } from "./attendance.entity";
 import { AttendanceService } from "./attendance.service";
-import { CreateAttendanceDto, UpdateAttendanceDto } from "./attendance.dto";
+import { CreateOrUpdateAttendanceDto } from "./attendance.dto";
 
 @Controller("attendance")
 export class AttendanceController {
@@ -26,8 +26,8 @@ export class AttendanceController {
     );
   }
 
-  // @Post("create-or-update")
-  // async createOrUpdateSellCosts(@Body() payload: CreateAttendanceDto) {
-  //   return this._attendanceService.createOrUpdateSellCosts(payload);
-  // }
+  @Post("create-or-update")
+  async createOrUpdateSellCosts(@Body() payload: CreateOrUpdateAttendanceDto) {
+    return this._attendanceService.createOrUpdateSellCosts(payload);
+  }
 }

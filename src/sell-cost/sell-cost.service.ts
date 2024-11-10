@@ -72,24 +72,6 @@ export class SellCostService {
     });
   }
 
-  // async getSellCostsByDateRangeForChart(
-  //   startDate: string,
-  //   endDate: string
-  // ): Promise<SellCost[]> {
-  //   return this.sellCostRepository.find({
-  //     where: {
-  //       date: Between(startDate, endDate),
-  //       // sell: Or(Not(0), Not(IsNull())),
-  //       // cost: Or(Not(0), Not(IsNull())),
-  //       sell: Or(Not(0), Not(0)),
-  //       cost: Or(Not(0), Not(0)),
-  //     },
-  //     order: {
-  //       date: "ASC",
-  //     },
-  //   });
-  // }
-
   async getSellCostsByDateRangeForChart(
     startDate: string,
     endDate: string

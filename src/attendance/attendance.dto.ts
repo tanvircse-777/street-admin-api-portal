@@ -1,12 +1,28 @@
 import { IsIn, IsNotEmpty, IsString } from "class-validator";
 import { CommonStatus } from "src/shared/shared.model";
 
-export class CreateAttendanceDto {
+
+export class CreateOrUpdateAttendanceDto {
+  daysData: CreateOrUpdateAttendanceRow[];
+}
+
+export class CreateOrUpdateAttendanceRow {
   @IsNotEmpty()
   @IsString()
   date: string;
 
-  amount: number;
+  @IsNotEmpty()
+  @IsString()
+  databaseDateFormat: string;
+
+  tanvirInTime: string;
+  tanvirOutTime: string;
+
+  shakilInTime: string;
+  shakilOutTime: string;
+
+  tarikInTime: string;
+  tarikOutTime: string;
 
   @IsNotEmpty()
   @IsString()
