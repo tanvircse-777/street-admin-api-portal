@@ -4,6 +4,7 @@ import { Between, Brackets, EntityManager, Equal, Repository } from "typeorm";
 import { OtherCosts } from "./other-costs.entity";
 import { OtherCostsDto } from "./other-costs.dto";
 import { CommonStatus } from "src/shared/shared.model";
+import { v4 as uuidv4 } from "uuid";
 
 @Injectable()
 export class OtherCostsService {
