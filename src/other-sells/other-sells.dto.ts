@@ -1,23 +1,22 @@
 import { IsIn, IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { CommonStatus } from "src/shared/shared.model";
 
-export class OtherCostsDto {
-  costsData: OtherCostsRow[];
-  deletedCostsId: number[];
+export class CreateOrUpdateOtherSellsDto {
+  daysData: CreateOrUpdateOtherSellsRow[];
 }
 
-export class OtherCostsRow {
-  id: number;
-
+export class CreateOrUpdateOtherSellsRow {
   @IsNotEmpty()
   @IsString()
   date: string;
 
   @IsNotEmpty()
   @IsString()
+  databaseDateFormat: string;
+
+  @IsString()
   title: string;
 
-  @IsNotEmpty()
   @IsNumber()
   amount: number;
 
@@ -27,7 +26,7 @@ export class OtherCostsRow {
   status: CommonStatus;
 }
 
-export class UpdateOtherCostsDto {
+export class UpdateOtherSellsDto {
   @IsNotEmpty()
   @IsString()
   date: string;

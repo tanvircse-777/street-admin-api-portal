@@ -3,6 +3,7 @@ import { Attendance } from "src/attendance/attendance.entity";
 import { Customer } from "src/customer/customer.entity";
 import { Feedback } from "src/feedback/feedback.entity";
 import { OtherCosts } from "src/other-costs/other-costs.entity";
+import { OtherSells } from "src/other-sells/other-sells.entity";
 import { SellCost } from "src/sell-cost/sell-cost.entity";
 import { Sell } from "src/sell/sell.entity";
 import { Task } from "src/tasks/task.entity";
@@ -14,6 +15,15 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   username: "dbadmin",
   password: "1234",
   database: "task-management",
-  entities: [Task, Feedback, Customer, Sell, SellCost, OtherCosts, Attendance],
+  entities: [
+    Task,
+    Feedback,
+    Customer,
+    Sell,
+    SellCost,
+    OtherCosts,
+    OtherSells,
+    Attendance,
+  ],
   synchronize: true,
 };

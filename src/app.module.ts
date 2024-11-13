@@ -8,6 +8,7 @@ import { SellModule } from "./sell/sell.module";
 import { SellCostModule } from "./sell-cost/sell-cost.module";
 import { OtherCostsModule } from "./other-costs/other-costs.module";
 import { AttendanceModule } from "./attendance/attendance.module";
+import { OtherSellsModule } from "./other-sells/other-sells.module";
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { AttendanceModule } from "./attendance/attendance.module";
     SellModule,
     SellCostModule,
     OtherCostsModule,
+    OtherSellsModule,
     AttendanceModule,
   ],
 })

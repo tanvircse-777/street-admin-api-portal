@@ -18,10 +18,8 @@ export class OtherCostsController {
   constructor(private _otherCostsService: OtherCostsService) {}
 
   @Get("by-month/:month")
-  getOtherCostsByDateRange(
-    @Param("month") month: string
-  ): Promise<OtherCosts[]> {
-    return this._otherCostsService.getOtherCostssByDateRange(month);
+  getOtherCostssByMonth(@Param("month") month: string): Promise<OtherCosts[]> {
+    return this._otherCostsService.getOtherCostssByMonth(month);
   }
 
   @Post("create-or-update")

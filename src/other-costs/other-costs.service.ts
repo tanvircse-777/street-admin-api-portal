@@ -14,33 +14,49 @@ export class OtherCostsService {
   ) {}
 
   async createOrUpdateOtherCostss(payload: OtherCostsDto) {
-    for (const day of payload.daysDate) {
-      const { databaseDateFormat, amount } = day;
-
-      // Check if a record with the specified date already exists
-      let otherCosts = await this.otherCostsRepository.findOne({
-        where: { date: databaseDateFormat },
-      });
-
-      if (otherCosts) {
-        // Update existing record
-        otherCosts.amount = amount ?? otherCosts.amount;
-      } else {
-        // Create new record
-        otherCosts = this.otherCostsRepository.create({
-          date: databaseDateFormat,
-          amount: amount ?? 0, // Default to 0 if null
+    for (const cost of payload.costsData) {
+      const { id, date, title, amount } = cost;
+      let otherCost;
+      if (!id) {
+        otherCost = this.otherCostsRepository.create({
+          date: date,
+          title: title ?? null,
+          amount: amount ?? 0,
           status: CommonStatus.ACTIVE,
         });
+      } else {
+        // Check if a record with the specified date already exists
+        otherCost = await this.otherCostsRepository.findOne({
+          where: { id: id },
+        });
+
+        if (otherCost) {
+          // Update existing record
+          otherCost.date = date ?? otherCost.date;
+          otherCost.title = title ?? otherCost.title;
+          otherCost.amount = amount ?? otherCost.amount;
+        }
       }
 
       // Save the record (insert if new, update if exists)
-      await this.otherCostsRepository.save(otherCosts);
+      await this.otherCostsRepository.save(otherCost);
+    }
+
+    for (const id of payload.deletedCostsId) {
+      // Check if a record with the specified date already exists
+      let otherCost = await this.otherCostsRepository.findOne({
+        where: { id: id },
+      });
+
+      if (otherCost) {
+        // Delete the record
+        await this.otherCostsRepository.delete(id);
+      }
     }
     return { message: "Sell costs processed successfully" };
   }
 
-  async getOtherCostssByDateRange(month: string): Promise<OtherCosts[]> {
+  async getOtherCostssByMonth(month: string): Promise<OtherCosts[]> {
     return this.otherCostsRepository.find({
       where: {
         date: Equal(month),
