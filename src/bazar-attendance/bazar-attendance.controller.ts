@@ -3,7 +3,7 @@ import { BazarAttendance } from "./bazar-attendance.entity";
 import { BazarAttendanceService } from "./bazar-attendance.service";
 import { CreateOrUpdateBazarAttendanceDto } from "./bazar-attendance.dto";
 
-@Controller("bazarAttendance")
+@Controller("bazar-attendance")
 export class BazarAttendanceController {
   constructor(private _bazarAttendanceService: BazarAttendanceService) {}
 

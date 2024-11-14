@@ -14,8 +14,6 @@ export class CreateOrUpdateBazarAttendanceRow {
   @IsString()
   databaseDateFormat: string;
 
-  @IsNotEmpty()
-  @IsString()
   userId: string;
 
   @IsNotEmpty()

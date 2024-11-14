@@ -51,6 +51,6 @@ export class BazarAttendanceService {
       // Save the record (insert if new, update if exists)
       await this.bazarAttendanceRepository.save(bazarAttendance);
     }
-    return { message: "Sell costs processed successfully" };
+    return { message: "Bazar attendance processed successfully" };
   }
 }
