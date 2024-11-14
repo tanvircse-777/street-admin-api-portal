@@ -9,6 +9,7 @@ import { SellCostModule } from "./sell-cost/sell-cost.module";
 import { OtherCostsModule } from "./other-costs/other-costs.module";
 import { AttendanceModule } from "./attendance/attendance.module";
 import { OtherSellsModule } from "./other-sells/other-sells.module";
+import { BazarAttendanceModule } from "./bazar-attendance/bazar-attendance.module";
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { OtherSellsModule } from "./other-sells/other-sells.module";
     OtherCostsModule,
     OtherSellsModule,
     AttendanceModule,
+    BazarAttendanceModule,
   ],
 })
 export class AppModule {}

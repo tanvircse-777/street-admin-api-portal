@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.typeOrmConfig = void 0;
 const attendance_entity_1 = require("../attendance/attendance.entity");
+const bazar_attendance_entity_1 = require("../bazar-attendance/bazar-attendance.entity");
 const customer_entity_1 = require("../customer/customer.entity");
 const feedback_entity_1 = require("../feedback/feedback.entity");
 const other_costs_entity_1 = require("../other-costs/other-costs.entity");
@@ -25,6 +26,7 @@ exports.typeOrmConfig = {
         other_costs_entity_1.OtherCosts,
         other_sells_entity_1.OtherSells,
         attendance_entity_1.Attendance,
+        bazar_attendance_entity_1.BazarAttendance,
     ],
     synchronize: true,
 };

@@ -1,5 +1,6 @@
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { Attendance } from "src/attendance/attendance.entity";
+import { BazarAttendance } from "src/bazar-attendance/bazar-attendance.entity";
 import { Customer } from "src/customer/customer.entity";
 import { Feedback } from "src/feedback/feedback.entity";
 import { OtherCosts } from "src/other-costs/other-costs.entity";
@@ -24,6 +25,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
     OtherCosts,
     OtherSells,
     Attendance,
+    BazarAttendance,
   ],
   synchronize: true,
 };
