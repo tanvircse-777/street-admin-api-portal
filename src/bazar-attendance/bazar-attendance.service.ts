@@ -38,7 +38,7 @@ export class BazarAttendanceService {
 
       if (bazarAttendance) {
         // Update existing record
-        bazarAttendance.userId = userId ?? bazarAttendance.userId;
+        bazarAttendance.userId = userId ?? "";
       } else {
         // Create new record
         bazarAttendance = this.bazarAttendanceRepository.create({

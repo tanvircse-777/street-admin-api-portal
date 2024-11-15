@@ -3,6 +3,7 @@ import { Attendance } from "src/attendance/attendance.entity";
 import { BazarAttendance } from "src/bazar-attendance/bazar-attendance.entity";
 import { Customer } from "src/customer/customer.entity";
 import { Feedback } from "src/feedback/feedback.entity";
+import { MonthlyConfig } from "src/monthly-config/monthly-config.entity";
 import { OtherCosts } from "src/other-costs/other-costs.entity";
 import { OtherSells } from "src/other-sells/other-sells.entity";
 import { SellCost } from "src/sell-cost/sell-cost.entity";
@@ -26,6 +27,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
     OtherSells,
     Attendance,
     BazarAttendance,
+    MonthlyConfig,
   ],
   synchronize: true,
 };

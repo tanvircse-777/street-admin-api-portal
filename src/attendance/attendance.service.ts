@@ -40,6 +40,8 @@ export class AttendanceService {
         shakilOutTime,
         tarikInTime,
         tarikOutTime,
+        siamInTime,
+        siamOutTime,
       } = day;
 
       // Check if a record with the specified date already exists
@@ -55,6 +57,8 @@ export class AttendanceService {
         attendance.shakilOutTime = shakilOutTime ?? attendance.shakilOutTime;
         attendance.tarikInTime = tarikInTime ?? attendance.tarikInTime;
         attendance.tarikOutTime = tarikOutTime ?? attendance.tarikOutTime;
+        attendance.siamInTime = siamInTime ?? attendance.siamInTime;
+        attendance.siamOutTime = siamOutTime ?? attendance.siamOutTime;
       } else {
         // Create new record
         attendance = this.attendanceRepository.create({
@@ -65,6 +69,8 @@ export class AttendanceService {
           shakilOutTime: shakilOutTime ?? 0,
           tarikInTime: tarikInTime ?? 0,
           tarikOutTime: tarikOutTime ?? 0,
+          siamInTime: siamInTime ?? 0,
+          siamOutTime: siamOutTime ?? 0,
           status: CommonStatus.ACTIVE,
         } as Attendance);
       }

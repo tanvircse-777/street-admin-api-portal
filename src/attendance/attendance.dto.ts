@@ -24,6 +24,10 @@ export class CreateOrUpdateAttendanceRow {
   tarikInTime: string;
   tarikOutTime: string;
 
+
+  siamInTime: string;
+  siamOutTime: string;
+
   @IsNotEmpty()
   @IsString()
   @IsIn([CommonStatus.ACTIVE, CommonStatus.INACTIVE])

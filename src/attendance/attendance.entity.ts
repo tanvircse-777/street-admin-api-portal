@@ -10,23 +10,29 @@ export class Attendance extends BaseEntity {
   @Column()
   date: string;
 
-  @Column()
+  @Column({ default: "0" })
   tanvirInTime: string;
 
-  @Column()
+  @Column({ default: "0" })
   tanvirOutTime: string;
 
-  @Column()
+  @Column({ default: "0" })
   shakilInTime: string;
 
-  @Column()
+  @Column({ default: "0" })
   shakilOutTime: string;
 
-  @Column()
+  @Column({ default: "0" })
   tarikInTime: string;
 
-  @Column()
+  @Column({ default: "0" })
   tarikOutTime: string;
+
+  @Column({ default: "0" })
+  siamInTime: string;
+
+  @Column({ default: "0" })
+  siamOutTime: string;
 
   @Column({
     type: "enum",

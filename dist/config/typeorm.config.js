@@ -5,6 +5,7 @@ const attendance_entity_1 = require("../attendance/attendance.entity");
 const bazar_attendance_entity_1 = require("../bazar-attendance/bazar-attendance.entity");
 const customer_entity_1 = require("../customer/customer.entity");
 const feedback_entity_1 = require("../feedback/feedback.entity");
+const monthly_config_entity_1 = require("../monthly-config/monthly-config.entity");
 const other_costs_entity_1 = require("../other-costs/other-costs.entity");
 const other_sells_entity_1 = require("../other-sells/other-sells.entity");
 const sell_cost_entity_1 = require("../sell-cost/sell-cost.entity");
@@ -27,6 +28,7 @@ exports.typeOrmConfig = {
         other_sells_entity_1.OtherSells,
         attendance_entity_1.Attendance,
         bazar_attendance_entity_1.BazarAttendance,
+        monthly_config_entity_1.MonthlyConfig,
     ],
     synchronize: true,
 };
