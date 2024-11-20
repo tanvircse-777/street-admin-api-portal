@@ -27,15 +27,3 @@ export class OtherCostsRow {
   status: CommonStatus;
 }
 
-export class UpdateOtherCostsDto {
-  @IsNotEmpty()
-  @IsString()
-  date: string;
-
-  amount: number;
-
-  @IsNotEmpty()
-  @IsString()
-  @IsIn([CommonStatus.ACTIVE, CommonStatus.INACTIVE])
-  status: CommonStatus;
-}

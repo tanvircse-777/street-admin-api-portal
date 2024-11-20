@@ -11,7 +11,7 @@ import {
 } from "@nestjs/common";
 import { OtherCosts } from "./other-costs.entity";
 import { OtherCostsService } from "./other-costs.service";
-import { OtherCostsDto, UpdateOtherCostsDto } from "./other-costs.dto";
+import { OtherCostsDto } from "./other-costs.dto";
 
 @Controller("other-costs")
 export class OtherCostsController {
@@ -19,11 +19,11 @@ export class OtherCostsController {
 
   @Get("by-month/:month")
   getOtherCostssByMonth(@Param("month") month: string): Promise<OtherCosts[]> {
-    return this._otherCostsService.getOtherCostssByMonth(month);
+    return this._otherCostsService.getOtherCostsByMonth(month);
   }
 
   @Post("create-or-update")
   async createOrUpdateOtherCostss(@Body() payload: OtherCostsDto) {
-    return this._otherCostsService.createOrUpdateOtherCostss(payload);
+    return this._otherCostsService.createOrUpdateOtherCosts(payload);
   }
 }

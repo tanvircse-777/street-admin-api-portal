@@ -14,7 +14,18 @@ export class OtherCostsService {
     private readonly entityManager: EntityManager
   ) {}
 
-  async createOrUpdateOtherCostss(payload: OtherCostsDto) {
+  async getOtherCostsByMonth(month: string): Promise<OtherCosts[]> {
+    return this.otherCostsRepository.find({
+      where: {
+        date: Equal(month),
+      },
+      order: {
+        date: "ASC",
+      },
+    });
+  }
+
+  async createOrUpdateOtherCosts(payload: OtherCostsDto) {
     for (const cost of payload.costsData) {
       const { id, date, title, amount } = cost;
       let otherCost;
@@ -55,16 +66,5 @@ export class OtherCostsService {
       }
     }
     return { message: "Sell costs processed successfully" };
-  }
-
-  async getOtherCostssByMonth(month: string): Promise<OtherCosts[]> {
-    return this.otherCostsRepository.find({
-      where: {
-        date: Equal(month),
-      },
-      order: {
-        date: "ASC",
-      },
-    });
   }
 }
