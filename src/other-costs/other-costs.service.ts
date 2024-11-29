@@ -25,6 +25,20 @@ export class OtherCostsService {
     });
   }
 
+  async getOtherCostsByDateRange(
+    startDate: string,
+    endDate: string
+  ): Promise<OtherCosts[]> {
+    return this.otherCostsRepository.find({
+      where: {
+        date: Between(startDate, endDate),
+      },
+      order: {
+        date: "ASC",
+      },
+    });
+  }
+
   async createOrUpdateOtherCosts(payload: OtherCostsDto) {
     for (const cost of payload.costsData) {
       const { id, date, title, amount } = cost;

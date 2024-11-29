@@ -31,6 +31,20 @@ export class OtherSellsService {
     });
   }
 
+  async getOtherSellsByDateRange(
+    startDate: string,
+    endDate: string
+  ): Promise<OtherSells[]> {
+    return this.otherSellsRepository.find({
+      where: {
+        date: Between(startDate, endDate),
+      },
+      order: {
+        date: "ASC",
+      },
+    });
+  }
+
   async createOrUpdateOtherSells(payload: OtherSellsDto) {
     for (const cost of payload.sellsData) {
       const { id, date, title, amount } = cost;

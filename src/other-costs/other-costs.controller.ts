@@ -18,8 +18,16 @@ export class OtherCostsController {
   constructor(private _otherCostsService: OtherCostsService) {}
 
   @Get("by-month/:month")
-  getOtherCostssByMonth(@Param("month") month: string): Promise<OtherCosts[]> {
+  getOtherCostsByMonth(@Param("month") month: string): Promise<OtherCosts[]> {
     return this._otherCostsService.getOtherCostsByMonth(month);
+  }
+
+  @Get("by-date-range/:startDate/:endDate")
+  getOtherCostsByDateRange(
+    @Param("startDate") startDate: string,
+    @Param("endDate") endDate: string
+  ): Promise<OtherCosts[]> {
+    return this._otherCostsService.getOtherCostsByDateRange(startDate, endDate);
   }
 
   @Post("create-or-update")

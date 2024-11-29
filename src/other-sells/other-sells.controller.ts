@@ -20,6 +20,14 @@ export class OtherSellsController {
     return this._otherSellsService.getOtherSellsByMonth(month);
   }
 
+  @Get("by-date-range/:startDate/:endDate")
+  getOtherSellsByDateRange(
+    @Param("startDate") startDate: string,
+    @Param("endDate") endDate: string
+  ): Promise<OtherSells[]> {
+    return this._otherSellsService.getOtherSellsByDateRange(startDate, endDate);
+  }
+
   @Post("create-or-update")
   async createOrUpdateOtherSellss(@Body() payload: OtherSellsDto) {
     return this._otherSellsService.createOrUpdateOtherSells(payload);
