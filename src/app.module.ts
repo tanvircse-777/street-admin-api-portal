@@ -11,6 +11,7 @@ import { AttendanceModule } from "./attendance/attendance.module";
 import { OtherSellsModule } from "./other-sells/other-sells.module";
 import { BazarAttendanceModule } from "./bazar-attendance/bazar-attendance.module";
 import { MonthlyConfigModule } from "./monthly-config/monthly-config.module";
+import { AccountsModule } from "./accounts/accounts.module";
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { MonthlyConfigModule } from "./monthly-config/monthly-config.module";
     OtherSellsModule,
     AttendanceModule,
     BazarAttendanceModule,
-    MonthlyConfigModule
+    MonthlyConfigModule,
+    AccountsModule
   ],
 })
 export class AppModule {}

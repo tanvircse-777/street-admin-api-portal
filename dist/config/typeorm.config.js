@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.typeOrmConfig = void 0;
+const accounts_entity_1 = require("../accounts/accounts.entity");
 const attendance_entity_1 = require("../attendance/attendance.entity");
 const bazar_attendance_entity_1 = require("../bazar-attendance/bazar-attendance.entity");
 const customer_entity_1 = require("../customer/customer.entity");
@@ -29,6 +30,7 @@ exports.typeOrmConfig = {
         attendance_entity_1.Attendance,
         bazar_attendance_entity_1.BazarAttendance,
         monthly_config_entity_1.MonthlyConfig,
+        accounts_entity_1.Accounts,
     ],
     synchronize: true,
 };
