@@ -10,6 +10,7 @@ import { OtherSells } from "src/other-sells/other-sells.entity";
 import { SellCost } from "src/sell-cost/sell-cost.entity";
 import { Sell } from "src/sell/sell.entity";
 import { Task } from "src/tasks/task.entity";
+import { Transactions } from "src/transactions/transactions.entity";
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: "postgres",
@@ -30,6 +31,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
     BazarAttendance,
     MonthlyConfig,
     Accounts,
+    Transactions,
   ],
   synchronize: true,
 };

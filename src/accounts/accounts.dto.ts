@@ -1,7 +1,6 @@
 import { IsIn, IsNotEmpty, IsString } from "class-validator";
 import { CommonStatus } from "src/shared/shared.model";
 
-
 export class UpdateAccountsDto {
   @IsNotEmpty()
   @IsString()
@@ -17,6 +16,7 @@ export class UpdateAccountsDto {
 
 export enum AccountType {
   CHERITABLE_FUND = "charitable_fund",
-  RAMZAN_FUND = "ramzan_func",
-  BALANCE = "balance",
+  RAMZAN_FUND = "ramzan_fund",
+  BALANCE = "main_balance",
+  INDIVIDUAL = "individual",
 }

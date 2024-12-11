@@ -21,6 +21,7 @@ const other_sells_module_1 = require("./other-sells/other-sells.module");
 const bazar_attendance_module_1 = require("./bazar-attendance/bazar-attendance.module");
 const monthly_config_module_1 = require("./monthly-config/monthly-config.module");
 const accounts_module_1 = require("./accounts/accounts.module");
+const transactions_module_1 = require("./transactions/transactions.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -38,7 +39,8 @@ exports.AppModule = AppModule = __decorate([
             attendance_module_1.AttendanceModule,
             bazar_attendance_module_1.BazarAttendanceModule,
             monthly_config_module_1.MonthlyConfigModule,
-            accounts_module_1.AccountsModule
+            accounts_module_1.AccountsModule,
+            transactions_module_1.TransactionsModule
         ],
     })
 ], AppModule);

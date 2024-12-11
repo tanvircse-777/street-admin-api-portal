@@ -12,6 +12,7 @@ const other_sells_entity_1 = require("../other-sells/other-sells.entity");
 const sell_cost_entity_1 = require("../sell-cost/sell-cost.entity");
 const sell_entity_1 = require("../sell/sell.entity");
 const task_entity_1 = require("../tasks/task.entity");
+const transactions_entity_1 = require("../transactions/transactions.entity");
 exports.typeOrmConfig = {
     type: "postgres",
     host: "localhost",
@@ -31,6 +32,7 @@ exports.typeOrmConfig = {
         bazar_attendance_entity_1.BazarAttendance,
         monthly_config_entity_1.MonthlyConfig,
         accounts_entity_1.Accounts,
+        transactions_entity_1.Transactions,
     ],
     synchronize: true,
 };
