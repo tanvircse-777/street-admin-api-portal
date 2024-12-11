@@ -31,7 +31,7 @@ export class CreateTransactionsDto {
   transactionType: TransationType;
 
   @IsNotEmpty()
-  transactionDate: Timestamp;
+  transactionDate: Date;
 
   @IsNotEmpty({ message: "Account Id Can not be empty" })
   accountId: number;

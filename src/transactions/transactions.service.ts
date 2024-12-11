@@ -84,4 +84,50 @@ export class TransactionsService {
       throw new Error("Transaction deletion failed");
     }
   }
+
+  async updateTransaction(
+    transactionId: number,
+    payload: CreateTransactionsDto
+  ) {
+    const transaction = await Transactions.findOne({
+      where: { id: transactionId },
+      relations: ["account"],
+    });
+
+    if (!transaction) {
+      throw new Error("Transaction not found");
+    }
+
+    const account = transaction.account;
+
+    try {
+      // Step 1: Reverse the impact of the old transaction
+      if (transaction.transactionType === "deposit") {
+        account.amount -= transaction.amount;
+      } else if (transaction.transactionType === "withdraw") {
+        account.amount += transaction.amount;
+      }
+
+      // Step 2: Update transaction details
+      transaction.amount = payload.amount;
+      transaction.transactionDate = payload.transactionDate;
+      transaction.description = payload.description;
+      transaction.transactionType = payload.transactionType;
+
+      // Step 3: Adjust the account's balance for the updated transaction
+      if (transaction.transactionType === "deposit") {
+        account.amount += transaction.amount;
+      } else if (transaction.transactionType === "withdraw") {
+        account.amount -= transaction.amount;
+      }
+
+      // Step 4: Save both the transaction and the account
+      await transaction.save();
+      await account.save();
+
+      return { message: "Transaction updated successfully" };
+    } catch (error) {
+      throw new Error("Transaction update failed");
+    }
+  }
 }
