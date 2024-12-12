@@ -1,10 +1,25 @@
-import { Body, Controller, Post, Delete, Param, Put } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Post,
+  Delete,
+  Param,
+  Put,
+  Get,
+} from "@nestjs/common";
 import { TransactionsService } from "./transactions.service";
 import { CreateTransactionsDto } from "./transactions.dto";
+import { Accounts } from "src/accounts/accounts.entity";
+import { Transactions } from "./transactions.entity";
 
 @Controller("transaction")
 export class TransactionsController {
   constructor(private _transactionsService: TransactionsService) {}
+
+  @Get("by-year/:year")
+  getAccountsByYear(@Param("year") year: string): Promise<Transactions[]> {
+    return this._transactionsService.getTransactionsForYear(year);
+  }
 
   @Post("create")
   async createTransaction(@Body() payload: CreateTransactionsDto) {

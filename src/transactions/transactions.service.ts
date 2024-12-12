@@ -1,13 +1,43 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { EntityManager, Repository } from "typeorm";
+import { Between, EntityManager, Repository } from "typeorm";
 import { Transactions } from "./transactions.entity";
 import { CreateTransactionsDto } from "./transactions.dto";
 import { Accounts } from "src/accounts/accounts.entity";
 
 @Injectable()
 export class TransactionsService {
-  constructor() {}
+  constructor(
+    @InjectRepository(Transactions)
+    private readonly transactionsRepository: Repository<Transactions>
+  ) {}
+
+  async getTransactionsForYear(year: string) {
+    const startDate = new Date(`${year}-01-01T00:00:00.000Z`);
+    const endDate = new Date(`${year}-12-31T23:59:59.999Z`);
+
+    return await this.transactionsRepository.find({
+      where: {
+        transactionDate: Between(startDate, endDate),
+      },
+      relations: ["account"], // Include the related 'account' entity
+      select: {
+        // Specify what fields to fetch
+        id: true,
+        amount: true,
+        transactionDate: true,
+        description: true,
+        transactionType: true,
+        account: {
+          id: true, // Fetch only the 'id' field from the account
+          accountName: true, // Fetch only the 'name' field from the account
+        },
+      },
+      order: {
+        transactionDate: "DESC", // Change to "ASC" or "DESC" according to need
+      },
+    });
+  }
 
   async createTransaction(payload: CreateTransactionsDto) {
     const account = await Accounts.findOne({

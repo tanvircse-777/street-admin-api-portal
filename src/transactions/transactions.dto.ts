@@ -11,11 +11,6 @@ export class CreateTransactionsDto {
   @IsNotEmpty()
   amount: number;
 
-  @IsNotEmpty()
-  @IsString()
-  @IsIn([CommonStatus.ACTIVE, CommonStatus.INACTIVE])
-  status: CommonStatus;
-
   @IsString()
   description: string;
 
