@@ -1,23 +1,14 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import {
-  Between,
-  EntityManager,
-  Equal,
-  IsNull,
-  Not,
-  Repository,
-} from "typeorm";
+import { Equal, Repository } from "typeorm";
 import { Accounts } from "./accounts.entity";
-import { UpdateAccountsDto } from "./accounts.dto";
 import { CommonStatus } from "src/shared/shared.model";
 
 @Injectable()
 export class AccountsService {
   constructor(
     @InjectRepository(Accounts)
-    private readonly accountsRepository: Repository<Accounts>,
-    private readonly entityManager: EntityManager
+    private readonly accountsRepository: Repository<Accounts>
   ) {}
 
   async getAccountsByYear(year: string): Promise<Accounts[]> {
@@ -29,6 +20,7 @@ export class AccountsService {
 
       order: {
         year: "ASC",
+        amount: "DESC",
       },
     });
   }

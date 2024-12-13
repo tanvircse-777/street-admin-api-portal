@@ -44,10 +44,8 @@ export class TransactionsService {
       where: { id: payload.accountId, year: payload.year },
     });
 
-    console.log("transaction payload", payload);
-
     if (!account) {
-      throw new Error("Account not found"); // Or use a proper exception (e.g., NotFoundException in NestJS)
+      throw new Error("Account not found");
     }
 
     const transaction = Transactions.create({
@@ -60,53 +58,75 @@ export class TransactionsService {
     });
 
     try {
+      // Step 1: Save the transaction
       await transaction.save();
 
-      // Update the account's amount based on transaction type
+      // Step 2: Update the associated account's balance
       if (transaction.transactionType === "deposit") {
         account.amount += transaction.amount;
       } else if (transaction.transactionType === "withdraw") {
         account.amount -= transaction.amount;
       }
 
-      // Save the updated account to persist the changes
-      try {
-        await account.save();
-      } catch (error) {
-        throw new Error("account update failed");
-      }
-    } catch (error) {
-      throw new Error("Transaction creation or account update failed");
-    }
+      await account.save();
 
-    return { message: "Transaction processed successfully" };
+      // Step 3: Update the main_balance account (if not the same account)
+      const mainBalanceAccount = await Accounts.findOne({
+        where: { accountType: "main_balance", year: account.year },
+      });
+
+      if (mainBalanceAccount && account.id !== mainBalanceAccount.id) {
+        if (transaction.transactionType === "deposit") {
+          mainBalanceAccount.amount += transaction.amount;
+        } else if (transaction.transactionType === "withdraw") {
+          mainBalanceAccount.amount -= transaction.amount;
+        }
+        await mainBalanceAccount.save();
+      }
+
+      return { message: "Transaction created successfully" };
+    } catch (error) {
+      throw new Error("Transaction creation failed");
+    }
   }
 
   async deleteTransaction(transactionId: number) {
-    // Find the transaction to be deleted
     const transaction = await Transactions.findOne({
       where: { id: transactionId },
       relations: ["account"], // Load the associated account
     });
 
     if (!transaction) {
-      throw new Error("Transaction not found"); // Or use a proper exception (e.g., NotFoundException in NestJS)
+      throw new Error("Transaction not found");
     }
 
     const account = transaction.account;
 
     try {
-      // Adjust the account's balance based on the transaction type
+      // Step 1: Adjust the associated account's balance to reverse the transaction's impact
       if (transaction.transactionType === "deposit") {
-        account.amount -= transaction.amount; // Revert deposit
+        account.amount -= transaction.amount;
       } else if (transaction.transactionType === "withdraw") {
-        account.amount += transaction.amount; // Revert withdrawal
+        account.amount += transaction.amount;
       }
 
-      // Save the updated account to persist the changes
       await account.save();
 
-      // Delete the transaction
+      // Step 2: Adjust the main_balance account (if not the same account)
+      const mainBalanceAccount = await Accounts.findOne({
+        where: { accountType: "main_balance", year: account.year },
+      });
+
+      if (mainBalanceAccount && account.id !== mainBalanceAccount.id) {
+        if (transaction.transactionType === "deposit") {
+          mainBalanceAccount.amount -= transaction.amount;
+        } else if (transaction.transactionType === "withdraw") {
+          mainBalanceAccount.amount += transaction.amount;
+        }
+        await mainBalanceAccount.save();
+      }
+
+      // Step 3: Delete the transaction
       await Transactions.delete(transactionId);
 
       return { message: "Transaction deleted successfully" };
@@ -131,29 +151,55 @@ export class TransactionsService {
     const account = transaction.account;
 
     try {
-      // Step 1: Reverse the impact of the old transaction
+      // Step 1: Reverse the impact of the old transaction on the associated account
       if (transaction.transactionType === "deposit") {
         account.amount -= transaction.amount;
       } else if (transaction.transactionType === "withdraw") {
         account.amount += transaction.amount;
       }
 
-      // Step 2: Update transaction details
+      // Step 2: Reverse the impact of the old transaction on `main_balance` account
+      const mainBalanceAccount = await Accounts.findOne({
+        where: { accountType: "main_balance", year: account.year },
+      });
+
+      // Ensure we're not syncing the `main_balance` with itself
+      if (mainBalanceAccount && account.id !== mainBalanceAccount.id) {
+        if (transaction.transactionType === "deposit") {
+          mainBalanceAccount.amount -= transaction.amount;
+        } else if (transaction.transactionType === "withdraw") {
+          mainBalanceAccount.amount += transaction.amount;
+        }
+        await mainBalanceAccount.save();
+      }
+
+      // Step 3: Update the transaction details
       transaction.amount = payload.amount;
       transaction.transactionDate = payload.transactionDate;
       transaction.description = payload.description;
       transaction.transactionType = payload.transactionType;
 
-      // Step 3: Adjust the account's balance for the updated transaction
+      // Step 4: Apply the updated transaction impact to the associated account
       if (transaction.transactionType === "deposit") {
         account.amount += transaction.amount;
       } else if (transaction.transactionType === "withdraw") {
         account.amount -= transaction.amount;
       }
 
-      // Step 4: Save both the transaction and the account
-      await transaction.save();
       await account.save();
+
+      // Step 5: Apply the updated transaction impact to the `main_balance` account
+      if (mainBalanceAccount && account.id !== mainBalanceAccount.id) {
+        if (transaction.transactionType === "deposit") {
+          mainBalanceAccount.amount += transaction.amount;
+        } else if (transaction.transactionType === "withdraw") {
+          mainBalanceAccount.amount -= transaction.amount;
+        }
+        await mainBalanceAccount.save();
+      }
+
+      // Step 6: Save the updated transaction
+      await transaction.save();
 
       return { message: "Transaction updated successfully" };
     } catch (error) {
