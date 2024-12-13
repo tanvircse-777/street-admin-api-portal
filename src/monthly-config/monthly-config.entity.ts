@@ -20,10 +20,14 @@ export class MonthlyConfig extends BaseEntity {
     default: ConfigFor.BAZAR_BONUS_PER_DAY,
   })
   config_for: string;
-  
 
   @Column()
   amount: number;
+
+  @Column({
+    default: false,
+  })
+  isAccountUpdated: boolean;
 
   @Column({
     type: "enum",

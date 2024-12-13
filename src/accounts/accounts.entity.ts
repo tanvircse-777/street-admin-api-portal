@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { CommonStatus } from "src/shared/shared.model";
-import { AccountType } from "./accounts.dto";
+import { AccountType, UserName } from "./accounts.dto";
 import { Transactions } from "src/transactions/transactions.entity";
 
 @Entity()
@@ -30,9 +30,11 @@ export class Accounts extends BaseEntity {
   accountType: string;
 
   @Column({
-    default: false,
+    type: "enum",
+    enum: UserName,
+    nullable: true,
   })
-  isAccountUpdated: boolean;
+  userName: string;
 
   @Column({
     type: "enum",

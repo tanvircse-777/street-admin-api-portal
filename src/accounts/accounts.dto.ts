@@ -20,3 +20,10 @@ export enum AccountType {
   BALANCE = "main_balance",
   INDIVIDUAL = "individual",
 }
+
+export enum UserName {
+  TANVIR = "tanvir",
+  SHAKIL = "shakil",
+  TARIK = "tarik",
+  SIAM = "siam",
+}
