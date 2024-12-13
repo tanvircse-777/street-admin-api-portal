@@ -17,7 +17,6 @@ export class MonthlyConfigRow {
   @IsString()
   title: string;
 
-
   @IsNotEmpty()
   @IsString()
   config_for: string;
@@ -43,4 +42,11 @@ export class UpdateMonthlyConfigDto {
   @IsString()
   @IsIn([CommonStatus.ACTIVE, CommonStatus.INACTIVE])
   status: CommonStatus;
+}
+
+export enum ConfigFor {
+  BAZAR_BONUS_PER_DAY = "bazar_bonus_per_day",
+  TIME_BASE_BONUS_PER_HOUR = "time_base_bonus_per_hour",
+  CHARITABLE_PERCENTAGE = "charitable_percentage",
+  RAMZAN_FUND = "ramzan_fund",
 }

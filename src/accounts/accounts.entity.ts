@@ -30,6 +30,11 @@ export class Accounts extends BaseEntity {
   accountType: string;
 
   @Column({
+    default: false,
+  })
+  isAccountUpdated: boolean;
+
+  @Column({
     type: "enum",
     enum: CommonStatus,
     default: CommonStatus.ACTIVE,
