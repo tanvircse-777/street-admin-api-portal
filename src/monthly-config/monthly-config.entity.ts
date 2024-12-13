@@ -14,15 +14,17 @@ export class MonthlyConfig extends BaseEntity {
   @Column()
   title: string;
 
-  @Column({
-    type: "enum",
-    enum: ConfigFor,
-    default: ConfigFor.BAZAR_BONUS_PER_DAY,
-  })
-  config_for: string;
+  @Column({ default: 0 })
+  bazarBonusPerDay: number;
 
-  @Column()
-  amount: number;
+  @Column({ default: 0 })
+  timeBaseBonusPerHour: number;
+
+  @Column({ default: 0 })
+  charitablePercentage: number;
+
+  @Column({ default: 0 })
+  ramzanFund: number;
 
   @Column({
     default: false,

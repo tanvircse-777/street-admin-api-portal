@@ -20,12 +20,12 @@ export class MonthlyConfigController {
   @Get("by-month/:month")
   getMonthlyConfigsByMonth(
     @Param("month") month: string
-  ): Promise<MonthlyConfig[]> {
+  ): Promise<MonthlyConfig> {
     return this._monthlyConfigService.getMonthlyConfigsByMonth(month);
   }
 
-  @Post("create-or-update")
-  async createOrUpdateMonthlyConfigs(@Body() payload: MonthlyConfigDto) {
-    return this._monthlyConfigService.createOrUpdateMonthlyConfigs(payload);
-  }
+  // @Post("create-or-update")
+  // async createOrUpdateMonthlyConfigs(@Body() payload: MonthlyConfigDto) {
+  //   return this._monthlyConfigService.createOrUpdateMonthlyConfigs(payload);
+  // }
 }
