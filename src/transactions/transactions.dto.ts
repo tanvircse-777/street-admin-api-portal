@@ -16,10 +16,6 @@ export class CreateTransactionsDto {
 
   @IsNotEmpty()
   @IsString()
-  year: string;
-
-  @IsNotEmpty()
-  @IsString()
   @IsIn([TransationType.DEPOSIT, TransationType.WITHDRAW], {
     message: "Transaction type must be deposit or withdraw",
   })

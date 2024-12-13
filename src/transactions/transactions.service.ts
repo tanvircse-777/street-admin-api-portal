@@ -41,7 +41,7 @@ export class TransactionsService {
 
   async createTransaction(payload: CreateTransactionsDto) {
     const account = await Accounts.findOne({
-      where: { id: payload.accountId, year: payload.year },
+      where: { id: payload.accountId },
     });
 
     if (!account) {
@@ -72,7 +72,7 @@ export class TransactionsService {
 
       // Step 3: Update the main_balance account (if not the same account)
       const mainBalanceAccount = await Accounts.findOne({
-        where: { accountType: "main_balance", year: account.year },
+        where: { accountType: "main_balance" },
       });
 
       if (mainBalanceAccount && account.id !== mainBalanceAccount.id) {
@@ -114,7 +114,7 @@ export class TransactionsService {
 
       // Step 2: Adjust the main_balance account (if not the same account)
       const mainBalanceAccount = await Accounts.findOne({
-        where: { accountType: "main_balance", year: account.year },
+        where: { accountType: "main_balance" },
       });
 
       if (mainBalanceAccount && account.id !== mainBalanceAccount.id) {
@@ -160,7 +160,7 @@ export class TransactionsService {
 
       // Step 2: Reverse the impact of the old transaction on `main_balance` account
       const mainBalanceAccount = await Accounts.findOne({
-        where: { accountType: "main_balance", year: account.year },
+        where: { accountType: "main_balance" },
       });
 
       // Ensure we're not syncing the `main_balance` with itself

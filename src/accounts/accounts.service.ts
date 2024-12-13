@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Equal, Repository } from "typeorm";
 import { Accounts } from "./accounts.entity";
 import { CommonStatus } from "src/shared/shared.model";
+import { AccountType } from "./accounts.dto";
 
 @Injectable()
 export class AccountsService {
@@ -11,15 +12,27 @@ export class AccountsService {
     private readonly accountsRepository: Repository<Accounts>
   ) {}
 
-  async getAccountsByYear(year: string): Promise<Accounts[]> {
+  async getAccounts(): Promise<Accounts[]> {
     return this.accountsRepository.find({
       where: {
         status: Equal(CommonStatus.ACTIVE),
-        year: Equal(year),
       },
 
       order: {
-        year: "ASC",
+        amount: "DESC",
+      },
+    });
+  }
+
+  async getAccountsByUser(userName: string): Promise<Accounts> {
+    return this.accountsRepository.findOne({
+      where: {
+        status: Equal(CommonStatus.ACTIVE),
+        userName: Equal(userName),
+        accountType: Equal(AccountType.INDIVIDUAL),
+      },
+
+      order: {
         amount: "DESC",
       },
     });

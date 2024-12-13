@@ -20,9 +20,6 @@ export class Accounts extends BaseEntity {
   @Column()
   accountName: string;
 
-  @Column()
-  year: string;
-
   @Column({
     type: "enum",
     enum: AccountType,

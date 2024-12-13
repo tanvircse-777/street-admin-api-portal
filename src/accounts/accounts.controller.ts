@@ -14,8 +14,13 @@ import { AccountsService } from "./accounts.service";
 export class AccountsController {
   constructor(private _accountsService: AccountsService) {}
 
-  @Get("by-year/:year")
-  getAccountsByYear(@Param("year") year: string): Promise<Accounts[]> {
-    return this._accountsService.getAccountsByYear(year);
+  @Get()
+  getAccounts(): Promise<Accounts[]> {
+    return this._accountsService.getAccounts();
+  }
+
+  @Get("by-user/:userName")
+  getAccountsByUser(@Param("userName") userName: string): Promise<Accounts> {
+    return this._accountsService.getAccountsByUser(userName);
   }
 }
