@@ -24,8 +24,14 @@ export class MonthlyConfigController {
     return this._monthlyConfigService.getMonthlyConfigsByMonth(month);
   }
 
-  // @Post("create-or-update")
-  // async createOrUpdateMonthlyConfigs(@Body() payload: MonthlyConfigDto) {
-  //   return this._monthlyConfigService.createOrUpdateMonthlyConfigs(payload);
-  // }
+  @Patch("update-isAccountUpdated/:id")
+  async updateIsAccountUpdated(
+    @Param("id", ParseIntPipe) id: number, // Ensures the ID is a valid integer
+    @Body("isAccountUpdated") isAccountUpdated: boolean // Extract `isAccountUpdated` from the request body
+  ): Promise<{ message: string; data: MonthlyConfig }> {
+    return await this._monthlyConfigService.updateIsAccountUpdated(
+      id,
+      isAccountUpdated
+    );
+  }
 }

@@ -13,51 +13,6 @@ export class MonthlyConfigService {
     private readonly entityManager: EntityManager
   ) {}
 
-  // async createOrUpdateMonthlyConfigs(payload: MonthlyConfigDto) {
-  //   for (const cost of payload.costsData) {
-  //     const { id, date, title, config_for, amount } = cost;
-  //     let otherCost;
-  //     if (!id) {
-  //       otherCost = this.monthlyConfigRepository.create({
-  //         month: date,
-  //         title: title,
-  //         config_for: config_for,
-  //         amount: amount ?? 0,
-  //         status: CommonStatus.ACTIVE,
-  //       });
-  //     } else {
-  //       // Check if a record with the specified date already exists
-  //       otherCost = await this.monthlyConfigRepository.findOne({
-  //         where: { id: id },
-  //       });
-
-  //       if (otherCost) {
-  //         // Update existing record
-  //         otherCost.date = date ?? otherCost.date;
-  //         otherCost.title = title ?? otherCost.title;
-  //         otherCost.config_for = config_for ?? otherCost.config_for;
-  //         otherCost.amount = amount ?? otherCost.amount;
-  //       }
-  //     }
-
-  //     // Save the record (insert if new, update if exists)
-  //     await this.monthlyConfigRepository.save(otherCost);
-  //   }
-
-  //   for (const id of payload.deletedCostsId) {
-  //     // Check if a record with the specified date already exists
-  //     let otherCost = await this.monthlyConfigRepository.findOne({
-  //       where: { id: id },
-  //     });
-
-  //     if (otherCost) {
-  //       // Delete the record
-  //       await this.monthlyConfigRepository.delete(id);
-  //     }
-  //   }
-  //   return { message: "Sell costs processed successfully" };
-  // }
-
   async getMonthlyConfigsByMonth(month: string): Promise<MonthlyConfig> {
     return this.monthlyConfigRepository.findOne({
       where: {
@@ -67,5 +22,52 @@ export class MonthlyConfigService {
         month: "ASC",
       },
     });
+  }
+
+  // async updateIsAccountUpdated(
+  //   id: number,
+  //   isAccountUpdated: boolean
+  // ): Promise<MonthlyConfig> {
+  //   // Find the record by ID
+  //   const monthlyConfig = await this.monthlyConfigRepository.findOne({
+  //     where: { id },
+  //   });
+
+  //   if (!monthlyConfig) {
+  //     throw new NotFoundException(`MonthlyConfig with ID ${id} not found`);
+  //   }
+
+  //   // Update the isAccountUpdated field
+  //   monthlyConfig.isAccountUpdated = isAccountUpdated;
+
+  //   // Save the updated record
+  //   return await this.monthlyConfigRepository.save(monthlyConfig);
+  // }
+
+  async updateIsAccountUpdated(
+    id: number,
+    isAccountUpdated: boolean
+  ): Promise<{ message: string; data: MonthlyConfig }> {
+    // Find the record by ID
+    const monthlyConfig = await this.monthlyConfigRepository.findOne({
+      where: { id },
+    });
+
+    if (!monthlyConfig) {
+      throw new NotFoundException(`MonthlyConfig with ID ${id} not found`);
+    }
+
+    // Update the isAccountUpdated field
+    monthlyConfig.isAccountUpdated = isAccountUpdated;
+
+    // Save the updated record
+    const updatedConfig =
+      await this.monthlyConfigRepository.save(monthlyConfig);
+
+    // Return success message along with the updated record
+    return {
+      message: "isAccountUpdated field updated successfully",
+      data: updatedConfig,
+    };
   }
 }
