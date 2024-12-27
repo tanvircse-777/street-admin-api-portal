@@ -13,18 +13,18 @@ import { Task } from "src/tasks/task.entity";
 import { Transactions } from "src/transactions/transactions.entity";
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
-  type: "postgres",
-  host: "localhost",
-  port: 5432,
-  username: "dbadmin",
-  password: "1234",
-  database: "task-management",
   // type: "postgres",
   // host: "localhost",
   // port: 5432,
-  // username: "streetadmin",
+  // username: "dbadmin",
   // password: "1234",
-  // database: "street_admin",
+  // database: "task-management",
+  type: "postgres",
+  host: "localhost",
+  port: 5432,
+  username: "streetadmin",
+  password: "1234",
+  database: "street_admin",
   entities: [
     Task,
     Feedback,

@@ -17,9 +17,9 @@ exports.typeOrmConfig = {
     type: "postgres",
     host: "localhost",
     port: 5432,
-    username: "dbadmin",
+    username: "streetadmin",
     password: "1234",
-    database: "task-management",
+    database: "street_admin",
     entities: [
         task_entity_1.Task,
         feedback_entity_1.Feedback,
