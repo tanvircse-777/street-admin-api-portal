@@ -19,6 +19,12 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   username: "dbadmin",
   password: "1234",
   database: "task-management",
+  // type: "postgres",
+  // host: "localhost",
+  // port: 5432,
+  // username: "streetadmin",
+  // password: "1234",
+  // database: "street_admin",
   entities: [
     Task,
     Feedback,
