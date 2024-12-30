@@ -9,7 +9,6 @@ import { OtherCosts } from "src/other-costs/other-costs.entity";
 import { OtherSells } from "src/other-sells/other-sells.entity";
 import { SellCost } from "src/sell-cost/sell-cost.entity";
 import { Sell } from "src/sell/sell.entity";
-import { Task } from "src/tasks/task.entity";
 import { Transactions } from "src/transactions/transactions.entity";
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
@@ -26,7 +25,6 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   password: "1234",
   database: "street_admin",
   entities: [
-    Task,
     Feedback,
     Customer,
     Sell,

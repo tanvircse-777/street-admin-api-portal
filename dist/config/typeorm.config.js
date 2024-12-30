@@ -11,7 +11,6 @@ const other_costs_entity_1 = require("../other-costs/other-costs.entity");
 const other_sells_entity_1 = require("../other-sells/other-sells.entity");
 const sell_cost_entity_1 = require("../sell-cost/sell-cost.entity");
 const sell_entity_1 = require("../sell/sell.entity");
-const task_entity_1 = require("../tasks/task.entity");
 const transactions_entity_1 = require("../transactions/transactions.entity");
 exports.typeOrmConfig = {
     type: "postgres",
@@ -21,7 +20,6 @@ exports.typeOrmConfig = {
     password: "1234",
     database: "street_admin",
     entities: [
-        task_entity_1.Task,
         feedback_entity_1.Feedback,
         customer_entity_1.Customer,
         sell_entity_1.Sell,
