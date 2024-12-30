@@ -24,16 +24,19 @@ export class MonthlyConfig extends BaseEntity {
   charitablePercentage: number;
 
   @Column({ default: 0 })
+  ramzanFund: number;
+
+  @Column({ default: 0 })
+  managerBonusPercentage: number;
+
+  @Column({ default: 0 })
   equlaProfitPercentage: number;
 
   @Column({ default: 0 })
-  bazarBonusPercentage: number;
+  improvementFundPercentage: number;
 
   @Column({ default: 0 })
-  managerBonus: number;
-
-  @Column({ default: 0 })
-  ramzanFund: number;
+  timeBaseBonusPercentage: number;
 
   @Column({
     default: false,
