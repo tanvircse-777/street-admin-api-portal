@@ -14,6 +14,10 @@ export class MonthlyConfig extends BaseEntity {
   @Column()
   title: string;
 
+
+  @Column({ default: 0 })
+  businessHour:number;
+
   @Column({ default: 0 })
   bazarBonusPerDay: number;
 
