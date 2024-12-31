@@ -14,9 +14,8 @@ export class MonthlyConfig extends BaseEntity {
   @Column()
   title: string;
 
-
   @Column({ default: 0 })
-  businessHour:number;
+  businessHour: number;
 
   @Column({ default: 0 })
   bazarBonusPerDay: number;
@@ -29,6 +28,9 @@ export class MonthlyConfig extends BaseEntity {
 
   @Column({ default: 0 })
   ramzanFund: number;
+
+  @Column({ default: "shakil" })
+  managerId: string;
 
   @Column({ default: 0 })
   managerBonusPercentage: number;
