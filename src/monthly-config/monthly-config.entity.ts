@@ -1,7 +1,6 @@
 // monthlyConfigs/monthlyConfig.entity.ts
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { CommonStatus } from "src/shared/shared.model";
-import { ConfigFor } from "./monthly-config.dto";
 
 @Entity()
 export class MonthlyConfig extends BaseEntity {
@@ -19,9 +18,6 @@ export class MonthlyConfig extends BaseEntity {
 
   @Column({ default: 0 })
   bazarBonusPerDay: number;
-
-  @Column({ default: 0 })
-  timeBaseBonusPerHour: number;
 
   @Column({ default: 0 })
   charitablePercentage: number;

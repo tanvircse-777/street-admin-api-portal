@@ -1,37 +1,29 @@
-import {
-  Body,
-  Controller,
-  Post,
-  Get,
-  Param,
-  Delete,
-  Patch,
-  Query,
-  ParseIntPipe,
-} from "@nestjs/common";
+// monthlyConfigs/monthlyConfig.controller.ts
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { CreateMonthlyConfigDto } from "./monthly-config.dto";
 import { MonthlyConfig } from "./monthly-config.entity";
 import { MonthlyConfigService } from "./monthly-config.service";
-import { MonthlyConfigDto } from "./monthly-config.dto";
 
 @Controller("monthly-config")
 export class MonthlyConfigController {
-  constructor(private _monthlyConfigService: MonthlyConfigService) {}
+  constructor(private readonly monthlyConfigService: MonthlyConfigService) {}
 
-  @Get("by-month/:month")
-  getMonthlyConfigsByMonth(
-    @Param("month") month: string
-  ): Promise<MonthlyConfig> {
-    return this._monthlyConfigService.getMonthlyConfigsByMonth(month);
+  // Get all monthly configurations
+  @Get("list")
+  async getAllMonthlyConfigs(): Promise<MonthlyConfig[]> {
+    return await this.monthlyConfigService.getAllMonthlyConfigs();
   }
 
-  @Patch("update-isAccountUpdated/:id")
-  async updateIsAccountUpdated(
-    @Param("id", ParseIntPipe) id: number, // Ensures the ID is a valid integer
-    @Body("isAccountUpdated") isAccountUpdated: boolean // Extract `isAccountUpdated` from the request body
+  // Get a specific monthly configuration by ID
+  @Get("by-id/:id")
+  async getMonthlyConfigById(@Param("id") id: number): Promise<MonthlyConfig> {
+    return await this.monthlyConfigService.getMonthlyConfigById(id);
+  }
+
+  @Post("create")
+  async createMonthlyConfig(
+    @Body() payload: CreateMonthlyConfigDto
   ): Promise<{ message: string; data: MonthlyConfig }> {
-    return await this._monthlyConfigService.updateIsAccountUpdated(
-      id,
-      isAccountUpdated
-    );
+    return await this.monthlyConfigService.createMonthlyConfig(payload);
   }
 }

@@ -1,47 +1,66 @@
-import { IsIn, IsNotEmpty, IsNumber, IsString } from "class-validator";
+// monthlyConfigs/dto/create-monthly-config.dto.ts
+import {
+  IsBoolean,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from "class-validator";
 import { CommonStatus } from "src/shared/shared.model";
 
-export class MonthlyConfigDto {
-  costsData: MonthlyConfigRow[];
-  deletedCostsId: number[];
-}
-
-export class MonthlyConfigRow {
-  id: number;
-
+export class CreateMonthlyConfigDto {
   @IsNotEmpty()
   @IsString()
-  date: string;
+  month: string;
 
   @IsNotEmpty()
   @IsString()
   title: string;
 
-  @IsNotEmpty()
-  @IsString()
-  config_for: string;
-
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
-  amount: number;
+  businessHour?: number;
 
-  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
+  bazarBonusPerDay?: number;
+
+  @IsOptional()
+  @IsNumber()
+  charitablePercentage?: number;
+
+  @IsOptional()
+  @IsNumber()
+  ramzanFund?: number;
+
+  @IsOptional()
   @IsString()
-  @IsIn([CommonStatus.ACTIVE, CommonStatus.INACTIVE])
-  status: CommonStatus;
-}
+  managerId?: string;
 
-export class UpdateMonthlyConfigDto {
-  @IsNotEmpty()
-  @IsString()
-  date: string;
+  @IsOptional()
+  @IsNumber()
+  managerBonusPercentage?: number;
 
-  amount: number;
+  @IsOptional()
+  @IsNumber()
+  equlaProfitPercentage?: number;
 
-  @IsNotEmpty()
-  @IsString()
-  @IsIn([CommonStatus.ACTIVE, CommonStatus.INACTIVE])
-  status: CommonStatus;
+  @IsOptional()
+  @IsNumber()
+  improvementFundPercentage?: number;
+
+  @IsOptional()
+  @IsNumber()
+  timeBaseBonusPercentage?: number;
+
+  @IsOptional()
+  @IsBoolean()
+  isAccountUpdated?: boolean;
+
+  @IsOptional()
+  @IsEnum(CommonStatus)
+  status?: CommonStatus;
 }
 
 export enum ConfigFor {
